@@ -6,7 +6,7 @@ export const getDocuments = query({
   handler: async (ctx) => {
     const identity = (await ctx.auth.getUserIdentity())?.tokenIdentifier;
     if (identity === undefined) {
-      throw new ConvexError("Not authenticated");
+      []
     }
 
     return await ctx.db.query("documents")
@@ -21,7 +21,7 @@ export const createDocument = mutation({
   handler: async (ctx, args) => {
     const identity = (await ctx.auth.getUserIdentity())?.tokenIdentifier;
     if (identity === undefined) {
-      throw new ConvexError("Not authenticated");
+      [];
     }
 
     const document = await ctx.db.insert("documents", {
