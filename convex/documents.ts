@@ -1,12 +1,12 @@
 import { mutation, query } from "./_generated/server";
-import { ConvexError, v } from "convex/values";
+import { v } from "convex/values";
 
 export const getDocuments = query({
   args: {},
   handler: async (ctx) => {
     const identity = (await ctx.auth.getUserIdentity())?.tokenIdentifier;
     if (identity === undefined) {
-      []
+      return [];
     }
 
     return await ctx.db.query("documents")
@@ -21,7 +21,7 @@ export const createDocument = mutation({
   handler: async (ctx, args) => {
     const identity = (await ctx.auth.getUserIdentity())?.tokenIdentifier;
     if (identity === undefined) {
-      [];
+      return [];
     }
 
     const document = await ctx.db.insert("documents", {
